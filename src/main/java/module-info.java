@@ -6,4 +6,5 @@ module com.example.applicalendrier {
 
     opens com.example.applicalendrier to javafx.fxml;
     exports com.example.applicalendrier;
+    exports vue;
 }
