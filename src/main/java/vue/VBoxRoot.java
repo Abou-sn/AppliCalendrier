@@ -12,6 +12,8 @@ public class VBoxRoot extends VBox {
 
         Label l1 = new Label(d1.toString());
         Label l2 = new Label(d2.toString());
+
+        this.getChildren().addAll(l1,l2);
     }
     }
 
