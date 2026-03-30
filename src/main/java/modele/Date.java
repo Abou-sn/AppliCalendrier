@@ -150,7 +150,7 @@ public class Date {
             System.out.println("la date n'est pas valide");
             return null;
         }
-        if (dernierJourMois(annee, mois) == jour) {
+        if (dernierJourMois(mois, annee) == jour) {
             if (mois == 12) {
                 return new Date(1, 1, annee + 1);
             }

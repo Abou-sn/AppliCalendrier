@@ -1,9 +1,13 @@
 package modele;
 
 import java.util.Calendar;
-public class DateCalendrier extends Date implements Comparable <Date> {
+import java.util.TreeMap;
 
+public class DateCalendrier extends Date implements Comparable <Date> {
     private int jourSemaine;
+    private int numeroSemaine;
+
+
 
     public DateCalendrier()  {
         super();
@@ -11,6 +15,7 @@ public class DateCalendrier extends Date implements Comparable <Date> {
         annee = today.get(Calendar.YEAR);
         mois = today.get(Calendar.MONTH)+1;
         jour = today.get(Calendar.DAY_OF_MONTH);
+        numeroSemaine = today.get(Calendar.WEEK_OF_YEAR);
 
         if (today.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
             jourSemaine = 7; // Considérer dimanche comme le 7ème jour
@@ -27,12 +32,19 @@ public class DateCalendrier extends Date implements Comparable <Date> {
         annee = today.get(Calendar.YEAR);
         mois = today.get(Calendar.MONTH)+1;
         jour = today.get(Calendar.DAY_OF_MONTH);
+        numeroSemaine = today.get(Calendar.WEEK_OF_YEAR);
 
         if (today.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
             jourSemaine = 7; // Considérer dimanche comme le 7ème jour
         else jourSemaine = today.get(Calendar.DAY_OF_WEEK)-1;
 
     }
+
+    public int getNumeroSemaine() {
+        return numeroSemaine;
+    }
+    public int getJourSemaine() {return jourSemaine;}
+
     @Override
     public DateCalendrier dateDuLendemain(){
         Date dateLend = super.dateDuLendemain();
