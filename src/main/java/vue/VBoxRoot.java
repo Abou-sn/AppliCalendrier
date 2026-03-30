@@ -1,19 +1,35 @@
 package vue;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import modele.CalendrierDuMois;
 import modele.DateCalendrier;
 import javafx.scene.control.Label;
 
 public class VBoxRoot extends VBox {
 
     public VBoxRoot() {
-        DateCalendrier d1 = new DateCalendrier();
-        DateCalendrier d2 = d1.dateDuLendemain();
+        int mois = 3;
+        int annee = 2026;
 
-        Label l1 = new Label(d1.toString());
-        Label l2 = new Label(d2.toString());
+        Label dateLabel = new Label("Mois : "+"Mars" + " Annee : "+annee);
+        this.getChildren().add(dateLabel);
 
-        this.getChildren().addAll(l1,l2);
+        CalendrierDuMois cal = new CalendrierDuMois (mois,annee);
+        VBox vbox = new VBox();
+        for (DateCalendrier d : cal.getDates()){
+            Label date = new Label(d.toString());
+            vbox.getChildren().add(date);
+
+        }
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(vbox);
+
+        this.getChildren().add(scrollPane);
+
+
+
+
     }
     }
 

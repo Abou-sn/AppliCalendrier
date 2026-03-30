@@ -10,7 +10,7 @@ public class AppliCalendrier extends Application {
     @Override
     public void start(Stage stage) {
         VBox root = new VBoxRoot();
-        Scene scene = new Scene(root,300,80);
+        Scene scene = new Scene(root,800,600);
         stage.setScene(scene);
         stage.setTitle("AppliCalendrier");
         stage.show();
