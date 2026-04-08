@@ -5,15 +5,22 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class AppliCalendrier extends Application {
 
     @Override
     public void start(Stage stage) {
         VBox root = new VBoxRoot();
         Scene scene = new Scene(root,800,600);
+        File [] fichierscss = new File("css").listFiles();
+        for(File f : fichierscss) scene.getStylesheets().add(f.toURI().toString());
         stage.setScene(scene);
         stage.setTitle("AppliCalendrier");
         stage.show();
+
+
+
 
 
     }
