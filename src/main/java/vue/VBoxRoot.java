@@ -21,12 +21,14 @@ public class VBoxRoot extends VBox {
         VBox.setMargin(titleLabel, new Insets(14));
         this.getChildren().add(titleLabel);
 
-        VBox datesBox = new VBox();
+
         StackPane monthStackPane = new StackPane();
         VBox.setMargin(monthStackPane, new Insets(4));
         this.getChildren().add(monthStackPane);
 
         for (DateCalendrier date : monthCalendar.getDates()) {
+            VBox datesBox = new VBox();
+
             Label dateLabel = new Label(date.toString());
             VBox.setMargin(dateLabel, new Insets(8));
             datesBox.getChildren().add(dateLabel);
