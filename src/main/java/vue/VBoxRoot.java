@@ -2,40 +2,46 @@ package vue;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import modele.CalendrierDuMois;
-import modele.Date;
+import modele.ConstantesCalendrier;
 import modele.DateCalendrier;
 import javafx.scene.control.Label;
 
 public class VBoxRoot extends VBox {
 
     public VBoxRoot() {
-        int mois = 4 ;
-        int annee = 2026;
-        DateCalendrier ajd = new DateCalendrier();
-        System.out.println(ajd);
+        DateCalendrier today = new DateCalendrier();
+        int month = today.getMois();
+        int year = today.getAnnee();
+        CalendrierDuMois monthCalendar = new CalendrierDuMois(month, year);
 
-        Label dateLabel = new Label("Avril " +annee);
-        this.getChildren().add(dateLabel);
+        Label titleLabel = new Label(ConstantesCalendrier.Mois.values()[month-1] + " " + year);
+        VBox.setMargin(titleLabel, new Insets(14));
+        this.getChildren().add(titleLabel);
 
-        CalendrierDuMois cal = new CalendrierDuMois (mois,annee);
-        VBox vbox = new VBox();
-        for (DateCalendrier d : cal.getDates()){
-            Label date = new Label(d.toString());
-            if (d.compareTo(ajd) == 0) {
-                date.setId("today");
+        VBox datesBox = new VBox();
+        StackPane monthStackPane = new StackPane();
+        VBox.setMargin(monthStackPane, new Insets(4));
+        this.getChildren().add(monthStackPane);
+
+        for (DateCalendrier date : monthCalendar.getDates()) {
+            Label dateLabel = new Label(date.toString());
+            VBox.setMargin(dateLabel, new Insets(8));
+            datesBox.getChildren().add(dateLabel);
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(datesBox);
+            monthStackPane.getChildren().add(scrollPane);
+
+            // ajout des attributs id pour la feuille de style
+            if (date.getMois() != month) {
+                dateLabel.setId("dateOutOfMonth");
             }
-            vbox.getChildren().add(date);
-
+            if (date.compareTo(today) == 0) {
+                dateLabel.setId("today");
+            }
         }
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(vbox);
-
-        this.getChildren().add(scrollPane);
-
-        VBoxRoot.setMargin(dateLabel,new Insets(15));
-
     }
-    }
+}
 
