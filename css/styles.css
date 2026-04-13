@@ -1,6 +1,9 @@
 #today {
     -fx-text-fill : coral;
-    -fx-font-size : 14px ;
+}
+
+#dateOutOfMonth {
+    -fx-text-fill: grey;
 }
 
 .scroll-pane {
