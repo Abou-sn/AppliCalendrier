@@ -2,9 +2,6 @@ package vue;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
@@ -16,11 +13,9 @@ import modele.Date;
 import modele.DateCalendrier;
 import javafx.scene.control.Label;
 
-import java.util.List;
+public class VBoxCalendrier extends VBox {
 
-public class VBoxRoot extends VBox {
-
-    public VBoxRoot() {
+    public VBoxCalendrier() {
         Date today = new DateCalendrier();
 
         StackPane monthStackPane = new StackPane();
