@@ -6,6 +6,16 @@
     -fx-text-fill: grey;
 }
 
+#opaque {
+    -fx-background-color: white;
+}
+
+.toggle-button {
+    -fx-background-color: white;
+}
+.toggle-button:selected {
+    -fx-background-color: lightblue;
+}
 .scroll-pane {
     -fx-background : #ddf5ee;
     -fx-border-color : #5F9EA0
