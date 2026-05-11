@@ -2,8 +2,12 @@ package vue;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -13,10 +17,15 @@ import modele.Date;
 import modele.DateCalendrier;
 import javafx.scene.control.Label;
 
+import javax.swing.*;
+
+import java.util.List;
+
 public class VBoxCalendrier extends VBox {
 
     public VBoxCalendrier() {
         Date today = new DateCalendrier();
+
 
         StackPane monthStackPane = new StackPane();
 
@@ -58,10 +67,43 @@ public class VBoxCalendrier extends VBox {
             }
 
             tilePane.setAccessibleText(ConstantesCalendrier.Mois.values()[monthIndex-1].toString());
+
+
             monthStackPane.getChildren().add(tilePane);
+
+        }
+        List <Node> listeMois = monthStackPane.getChildren();
+        String moisCourant = ConstantesCalendrier.Mois.values()[today.getMois()-1].toString();
+        while (!listeMois.getLast().getAccessibleText().equals(moisCourant)) {
+            listeMois.get(today.getMois()).toFront();
         }
 
+        Button firstButton = new Button("<<");
+        Button lastButton = new Button(">>");
+        Button prevButton = new Button("<");
+        Button nextButton = new Button(">");
+
+        nextButton.setId("nextButton"); prevButton.setId("prevButton");
+
+        prevButton.setOnAction(event -> {
+            System.out.println("Mois précédent");
+            List<Node> liste = monthStackPane.getChildren();
+            liste.get(liste.size()-1).toBack();
+        });
+
+        nextButton.setOnAction(event -> {
+            System.out.println("Mois suivant");
+            List<Node> liste = monthStackPane.getChildren();
+            liste.get(0).toFront();
+        });
+
+        HBox buttonHBox = new HBox();
+        buttonHBox.setSpacing(25);
+        buttonHBox.getChildren().addAll(firstButton,prevButton, nextButton,lastButton);
+
         this.getChildren().add(monthStackPane);
+        this.getChildren().add(buttonHBox);
+
     }
 
 
