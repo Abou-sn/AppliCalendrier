@@ -3,6 +3,8 @@ package vue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -32,7 +34,6 @@ public class VBoxCalendrier extends VBox {
 
         for (int monthIndex = 1; monthIndex<=12 ; monthIndex++){
             CalendrierDuMois monthCalendar = new CalendrierDuMois(monthIndex, today.getAnnee());
-
             TilePane tilePane = new TilePane();
             tilePane.setPrefColumns(7);
             tilePane.setHgap(10);
@@ -77,31 +78,63 @@ public class VBoxCalendrier extends VBox {
             listeMois.get(0).toFront();
         } // Affichage du mois courant
 
+        Label labelMois = new Label(moisCourant);
+        labelMois.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;"); // Un peu de style
+        HBox titleHBox = new HBox(labelMois);
+//
+//      C'est ici que la magie opère pour le centrage !
+        titleHBox.setAlignment(Pos.CENTER);
+        titleHBox.setPadding(new Insets(10, 0, 10, 0)); // Un peu d'air autour du titre
+
         Button firstButton = new Button("<<");
         Button lastButton = new Button(">>");
         Button prevButton = new Button("<");
         Button nextButton = new Button(">");
 
-        nextButton.setId("nextButton"); prevButton.setId("prevButton");
+        nextButton.setId("nextButton"); prevButton.setId("prevButton"); firstButton.setId("firstButton"); lastButton.setId("lastButton");
+
+        firstButton.setOnAction(event -> {
+            String premierMois = ConstantesCalendrier.Mois.JANVIER.toString();
+            // Tant que le mois visible (le dernier de la liste) n'est pas janvier, on fait tourner !
+            while (!listeMois.getLast().getAccessibleText().equals(premierMois)) {
+                listeMois.get(0).toFront();
+            }
+            labelMois.setText(monthStackPane.getChildren().getLast().getAccessibleText());
+        });
+        lastButton.setOnAction(event -> {
+            String premierMois = ConstantesCalendrier.Mois.DECEMBRE.toString();
+
+            // Tant que le mois visible (le dernier de la liste) n'est pas janvier, on fait tourner !
+            while (!listeMois.getLast().getAccessibleText().equals(premierMois)) {
+                listeMois.get(0).toFront();
+            }
+            labelMois.setText(monthStackPane.getChildren().getLast().getAccessibleText());
+        });
+
         prevButton.setOnAction(event -> {
             System.out.println("Mois précédent");
             List<Node> liste = monthStackPane.getChildren();
             liste.get(liste.size()-1).toBack();
+            labelMois.setText(monthStackPane.getChildren().getLast().getAccessibleText());
         });
 
         nextButton.setOnAction(event -> {
             System.out.println("Mois suivant");
             List<Node> liste = monthStackPane.getChildren();
             liste.get(0).toFront();
+            labelMois.setText(monthStackPane.getChildren().getLast().getAccessibleText());
         });
 
         HBox buttonHBox = new HBox();
         buttonHBox.setSpacing(25);
+        buttonHBox.setAlignment(Pos.CENTER);
+        buttonHBox.setPadding(new Insets(10, 0, 10, 0)); // Un peu d'air autour des boutons
+
         buttonHBox.getChildren().addAll(firstButton,prevButton, nextButton,lastButton);
         buttonHBox.setId("buttonHBox");
 
-        this.getChildren().add(monthStackPane);
-        this.getChildren().add(buttonHBox);
+        // Remplace tes lignes d'ajout final par :
+        this.getChildren().addAll(titleHBox, monthStackPane, buttonHBox);
 
     }
 
