@@ -20,7 +20,7 @@
 .toggle-button:hover {
     -fx-background-color: #e2d7d7;
 }
-.scroll-pane {
-    -fx-background : #ddf5ee;
-    -fx-border-color : #5F9EA0
+
+#buttonHbox {
+    -fx-border-color: black;
 }

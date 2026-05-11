@@ -2,7 +2,7 @@ package vue;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -26,7 +26,6 @@ public class VBoxCalendrier extends VBox {
     public VBoxCalendrier() {
         Date today = new DateCalendrier();
 
-
         StackPane monthStackPane = new StackPane();
 
         ToggleGroup buttonGroup = new ToggleGroup();
@@ -36,6 +35,7 @@ public class VBoxCalendrier extends VBox {
 
             TilePane tilePane = new TilePane();
             tilePane.setPrefColumns(7);
+            tilePane.setHgap(10);
 
             tilePane.setPrefRows(monthCalendar.getDates().size()/7+1);
 
@@ -68,15 +68,14 @@ public class VBoxCalendrier extends VBox {
 
             tilePane.setAccessibleText(ConstantesCalendrier.Mois.values()[monthIndex-1].toString());
 
-
             monthStackPane.getChildren().add(tilePane);
 
         }
         List <Node> listeMois = monthStackPane.getChildren();
         String moisCourant = ConstantesCalendrier.Mois.values()[today.getMois()-1].toString();
         while (!listeMois.getLast().getAccessibleText().equals(moisCourant)) {
-            listeMois.get(today.getMois()).toFront();
-        }
+            listeMois.get(0).toFront();
+        } // Affichage du mois courant
 
         Button firstButton = new Button("<<");
         Button lastButton = new Button(">>");
@@ -84,7 +83,6 @@ public class VBoxCalendrier extends VBox {
         Button nextButton = new Button(">");
 
         nextButton.setId("nextButton"); prevButton.setId("prevButton");
-
         prevButton.setOnAction(event -> {
             System.out.println("Mois précédent");
             List<Node> liste = monthStackPane.getChildren();
@@ -100,6 +98,7 @@ public class VBoxCalendrier extends VBox {
         HBox buttonHBox = new HBox();
         buttonHBox.setSpacing(25);
         buttonHBox.getChildren().addAll(firstButton,prevButton, nextButton,lastButton);
+        buttonHBox.setId("buttonHBox");
 
         this.getChildren().add(monthStackPane);
         this.getChildren().add(buttonHBox);
