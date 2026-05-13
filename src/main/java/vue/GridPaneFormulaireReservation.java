@@ -17,7 +17,7 @@ public class GridPaneFormulaireReservation extends GridPane {
         setVgap(15);
         //Label du Cours et le champs d'entrée
         add(new Label("Cours"),0,0);
-        add(new TextField(),1,0);
+        add(new TextField(),1,0,5,1);
 
         add(new Label("Horaire"),0,1); add(new Label("de"),1,1); add (new Label("à"),1,2);
 
