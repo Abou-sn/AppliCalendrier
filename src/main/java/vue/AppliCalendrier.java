@@ -11,7 +11,7 @@ import java.io.File;
 public class AppliCalendrier extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void  start(Stage stage) {
         HBoxRoot root = new HBoxRoot();
         Scene scene = new Scene(root,1200,800);
         File [] fichierscss = new File("css").listFiles();
