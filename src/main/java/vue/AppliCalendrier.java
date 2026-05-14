@@ -13,7 +13,7 @@ public class AppliCalendrier extends Application {
     @Override
     public void  start(Stage stage) {
         HBoxRoot root = new HBoxRoot();
-        Scene scene = new Scene(root,1200,800);
+        Scene scene = new Scene(root,800,500);
         File [] fichierscss = new File("css").listFiles();
         for(File f : fichierscss) scene.getStylesheets().add(f.toURI().toString());
         stage.setScene(scene);

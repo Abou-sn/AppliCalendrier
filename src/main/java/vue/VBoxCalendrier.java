@@ -135,7 +135,6 @@ public class VBoxCalendrier extends VBox {
 
         // Remplace tes lignes d'ajout final par :
         this.getChildren().addAll(titleHBox, monthStackPane, buttonHBox);
-
     }
 
 

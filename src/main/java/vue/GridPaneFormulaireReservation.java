@@ -1,11 +1,16 @@
 package vue;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import modele.Date;
+import modele.DateCalendrier;
 
 public class GridPaneFormulaireReservation extends GridPane {
     private final int heureDebutDefault = 7;
@@ -13,19 +18,35 @@ public class GridPaneFormulaireReservation extends GridPane {
     private final int minutesDefault = 0;
 
     public void initialisation(){
+        Date today = new DateCalendrier();
         setPadding(new Insets(55,10,0,50));
         setHgap(15);
         setVgap(15);
 
-        Label dateSelect = new Label("DateSelectionné");
-        add(dateSelect,0,0,6,1);
+        Label dateSelect = new Label(today.toString()); dateSelect.setId("dateSelect");
+        HBox dateSelectHBox = new HBox(dateSelect);
+        dateSelectHBox.setAlignment(Pos.CENTER);
+        dateSelectHBox.setPadding(new Insets(10, 0, 10, 0));
+        dateSelectHBox.setSpacing(25);
+        dateSelectHBox.setId("dateSelectHBox");
+
+        add(dateSelectHBox,0,0,6,1);
 
 
         //Label du Cours et le champ d'entrée
-        add(new Label("Cours"),0,1);
-        add(new TextField(),1,1,5,1);
+        Label coursLabel = new Label("_Cours"); coursLabel.setId("labelCours");
+        TextField coursTextF = new TextField();
 
-        add(new Label("Horaire"),0,2); add(new Label("de"),1,2); add (new Label("à"),1,3);
+        coursLabel.setLabelFor(coursTextF); // associer le label au TF
+        coursLabel.setMnemonicParsing(true);
+
+        Platform.runLater(()-> coursTextF.requestFocus());
+
+        add(coursLabel,0,1);
+        add(coursTextF,1,1,5,1);
+
+        Label horaireLabel = new Label("Horaire"); horaireLabel.setId("labelHoraire");
+        add(horaireLabel,0,2); add(new Label("de"),1,2); add (new Label("à"),1,3);
 
         ComboBox<Integer> heuresDebut = new ComboBox<>(); heuresDebut.setValue(heureDebutDefault);
         ComboBox<Integer> minutesDebut = new ComboBox<>(); minutesDebut.setValue(minutesDefault);
@@ -47,10 +68,26 @@ public class GridPaneFormulaireReservation extends GridPane {
         add(heuresDebut,2,2); add(new Label("h"),3,2);add(minutesDebut,4,2); add(new Label("min"),5,2); //ajout de la liste des heures début
         add(heuresFin,2,3); add(new Label("h"),3,3);add(minutesFin,4,3);add(new Label("min"),5,3); //Pareil pour heures de fin
 
+        HBox buttonHBox = new HBox();
+        buttonHBox.setAlignment(Pos.CENTER);
+        buttonHBox.setSpacing(25);
+        buttonHBox.setPadding(new Insets(10, 0, 10, 0));
+
+        Button buttonEnregistrer = new Button("_Enregistrer");
+        buttonEnregistrer.setMnemonicParsing(true);
+        Button buttonAnnuler = new Button("_Annuler");
+        buttonAnnuler.setMnemonicParsing(true);
+
+        buttonHBox.getChildren().addAll(buttonEnregistrer,buttonAnnuler);
+
+        add(buttonHBox,0,4,6,1);
     }
 
+
     public GridPaneFormulaireReservation() {
-        setGridLinesVisible(true);
+        setGridLinesVisible(false);
+
         initialisation();
+
     }
 }
