@@ -59,7 +59,7 @@ public class PlanningCollections {
         else return reservationsTree ;
     }
 
-    public TreeSet <Reservation> getReservationd(String parString){
+    public TreeSet <Reservation> getReservation(String parString){
         TreeSet <Reservation> reservationsTree = new TreeSet<Reservation>();
         for (Reservation res : reservationTreeSet){
             if (res.getTitre().equals(parString)) reservationsTree.add(res);
