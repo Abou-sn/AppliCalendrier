@@ -21,6 +21,7 @@ public class Controleur  implements EventHandler {
             System.out.println("Date selectionnée : " + dateSelect);
             Label labelDateSelect = reservationPane.getDateSelect();
             labelDateSelect.setText(dateSelect.toString());
+            labelDateSelect.setUserData(dateSelect);
 
         }
 
@@ -36,9 +37,11 @@ public class Controleur  implements EventHandler {
                 PlageHoraire plageHoraire = new PlageHoraire(hDebut,hFin);
 
                 Reservation res = new Reservation(intitule,date,plageHoraire);
+                System.out.println(res);
 
                 try {
                     planning.ajout(res);
+                    System.out.println(planning);
                 } catch (ExceptionPlanning e) {
                     System.out.println(e.getMessage());
                 }

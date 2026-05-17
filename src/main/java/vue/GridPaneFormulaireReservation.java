@@ -32,6 +32,7 @@ public class GridPaneFormulaireReservation extends GridPane {
         setVgap(15);
 
         dateSelect = new Label(today.toString()); dateSelect.setId("dateSelect");
+        dateSelect.setUserData(today);
         HBox dateSelectHBox = new HBox(dateSelect);
         dateSelectHBox.setAlignment(Pos.CENTER);
         dateSelectHBox.setPadding(new Insets(10, 0, 10, 0));
