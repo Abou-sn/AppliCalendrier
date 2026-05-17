@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.Controleur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -28,6 +29,7 @@ public class VBoxCalendrier extends VBox {
     public VBoxCalendrier() {
         Date today = new DateCalendrier();
 
+
         StackPane monthStackPane = new StackPane();
 
         ToggleGroup buttonGroup = new ToggleGroup();
@@ -54,12 +56,7 @@ public class VBoxCalendrier extends VBox {
                 tilePane.getChildren().add(dateButton);
 
                 dateButton.setUserData(date);
-                dateButton.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        System.out.println("Date selectionné : "+dateButton.getUserData());
-                    }
-                });
+                dateButton.setOnAction(HBoxRoot.getControleur());
 
                 if (date.getMois() != monthCalendar.getMois()){
                     dateButton.setId("dateOutOfMonth");

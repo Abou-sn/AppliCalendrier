@@ -11,7 +11,6 @@ public class HBoxRoot extends HBox {
     private static GridPaneFormulaireReservation reservationPane;
 
     public HBoxRoot() {
-
         planning = new PlanningCollections();
         controleur = new Controleur();
         calendrierPane = new VBoxCalendrier();
@@ -20,16 +19,16 @@ public class HBoxRoot extends HBox {
 
     }
 
-    public PlanningCollections getPlanning() {
+    public static PlanningCollections getPlanning() {
         return planning;
     }
-    public Controleur getControleur() {
+    public static Controleur getControleur() {
         return controleur;
     }
-    public VBoxCalendrier getCalendrierPane() {
+    public static VBoxCalendrier getCalendrierPane() {
         return calendrierPane;
     }
-    public GridPaneFormulaireReservation getReservationPane() {
+    public static GridPaneFormulaireReservation getReservationPane() {
         return reservationPane;
     }
 }
