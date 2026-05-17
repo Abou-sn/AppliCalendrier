@@ -45,7 +45,7 @@ public class Controleur  implements EventHandler {
 
             }
 
-            if ((Button) event.getSource() == reservationPane.getButtonAnnuler()){
+            else if ((Button) event.getSource() == reservationPane.getButtonAnnuler()){
                 System.out.println("Annulation");
                 TextField tf = reservationPane.getCoursTextF();
                 tf.clear();
