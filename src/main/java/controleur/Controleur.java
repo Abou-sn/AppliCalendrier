@@ -52,7 +52,7 @@ public class Controleur  implements EventHandler {
                 Platform.runLater(()-> tf.requestFocus());
 
                 ComboBox<Integer> hd = reservationPane.getHeuresDebut();
-                hd.setValue(reservationPane.getMinutesDefault());
+                hd.setValue(reservationPane.getHeureDebutDefault());
                 ComboBox<Integer> hf = reservationPane.getHeuresFin();
                 hf.setValue(reservationPane.getHeureFinDefault());
                 ComboBox<Integer> md = reservationPane.getMinutesDebut();
